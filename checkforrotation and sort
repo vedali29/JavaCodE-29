@@ -1,0 +1,33 @@
+public class Solution {
+    public boolean check(int[] nums) {
+        int n = nums.length;
+        int rotatePoint = -1;
+
+        // Find the rotation point
+        for (int i = 0; i < n - 1; i++) {
+            if (nums[i] > nums[i + 1]) {
+                rotatePoint = i + 1;
+                break;
+            }
+        }
+
+        // If there is no rotation point, array is already sorted
+        if (rotatePoint == -1) {
+            return true;
+        }
+
+        // Check if rotating at rotatePoint results in a sorted array
+        int[] rotatedArray = new int[n];
+        for (int i = 0; i < n; i++) {
+            rotatedArray[i] = nums[(rotatePoint + i) % n];
+        }
+
+        for (int i = 0; i < n - 1; i++) {
+            if (rotatedArray[i] > rotatedArray[i + 1]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
